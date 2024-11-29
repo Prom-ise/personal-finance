@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import BudgetDoughnutChart from "./components/ui/component/BudgetDoughnutChart";
 import "./App.css";
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -16,9 +17,10 @@ import {
   updateDoc,
   Timestamp,
 } from "firebase/firestore";
-import { Bar } from "react-chartjs-2";
+import { Bar, Doughnut } from "react-chartjs-2";
 import {
   Chart as ChartJS,
+  ArcElement,
   CategoryScale,
   LinearScale,
   BarElement, // Import BarElement for bar charts
@@ -69,6 +71,7 @@ import {
 // Initialize Chart.js
 ChartJS.register(
   CategoryScale,
+  ArcElement,
   LinearScale,
   BarElement,
   Title,
@@ -743,8 +746,8 @@ export default function PersonalFinanceApp() {
                     </div>
 
                     <div className="col-span-4 p-4 budget">
-                      <h1 className="text-lg font-bold mb-2">Budget</h1>
-                      <ul>
+                      <h1 className="text-lg font-bold mb-2">Budget Overview</h1>
+                      {/* <ul>
                         <li>Cafe & Restaurants</li>
                         <li>Investment</li>
                         <li>Food & Groceries</li>
@@ -752,7 +755,10 @@ export default function PersonalFinanceApp() {
                         <li>Health & Beauty</li>
                         <li>Traveling</li>
                         <li>Other</li>
-                      </ul>
+                      </ul> */}
+                      <div className="mt-[-4.5em] mb-[-3em]">
+          <BudgetDoughnutChart expenses={expenses} />
+        </div>
                     </div>
                   </div>
                 </CardContent>
