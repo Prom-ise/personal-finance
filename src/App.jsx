@@ -878,6 +878,8 @@ export default function PersonalFinanceApp() {
                     <h3 className="text-lg font-semibold mb-2">
                       Budget Overview
                     </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
                     <Progress
                       value={(totalExpenses / budget) * 100}
                       className="w-full h-4"
@@ -886,6 +888,12 @@ export default function PersonalFinanceApp() {
                       <span>Spent: ${totalExpenses.toFixed(2)}</span>
                       <span>Remaining: ${remainingBudget.toFixed(2)}</span>
                     </div>
+                    </div>
+                    <div className="w-full h-100 mt-[-4em]">
+          <BudgetDoughnutChart expenses={expenses} />
+        </div>
+                    </div>
+                    
                   </div>
                 </CardContent>
               </Card>
