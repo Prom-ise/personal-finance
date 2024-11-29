@@ -66,6 +66,7 @@ import {
   Bell,
   Calculator,
   Edit,
+  ArrowUpRight
 } from "lucide-react";
 
 // Initialize Chart.js
@@ -590,7 +591,7 @@ export default function PersonalFinanceApp() {
                       </Button>
                     </div> */}
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div className="finances">
+                    <div className="finances relative">
                       <h3 className="text-lg font-semibold mb-2">
                         Total balance
                       </h3>
@@ -623,7 +624,12 @@ export default function PersonalFinanceApp() {
                         <div className="text-[gainsboro]">vs last month</div>
                       </div>
                     </div>
-                    <div className="finances">
+                    <div className="finances relative">
+                    <TabsList className="absolute top-2 right-2 text-[grey] flex items-center justify-center w-[2em] h-[2em] border-[gainsboro] border-2 rounded-full p-1]">
+                    <TabsTrigger value="expenses">
+                    <div ><ArrowUpRight/></div>
+                    </TabsTrigger>
+                    </TabsList>
                       <h3 className="text-lg font-semibold mb-2">
                         Total Expenses
                       </h3>
@@ -640,7 +646,12 @@ export default function PersonalFinanceApp() {
                         <div className="text-[gainsboro]">vs last month</div>
                       </div>
                     </div>
-                    <div className="finances">
+                    <div className="finances relative">
+                    <TabsList className="absolute top-2 right-2 text-[grey] flex items-center justify-center w-[2em] h-[2em] border-[gainsboro] border-2 rounded-full p-1]">
+                    <TabsTrigger value="budget">
+                    <div ><ArrowUpRight/></div>
+                    </TabsTrigger>
+                    </TabsList>
                       <h3 className="text-lg font-semibold mb-2">
                         Remaining Budget
                       </h3>
