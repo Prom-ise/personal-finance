@@ -679,13 +679,20 @@ export default function PersonalFinanceApp() {
                       <Bar data={chartData} />
                     </div>
                     <div className="chart-graph">
-                      <h1 className="text-lg font-bold mb-2">Budget</h1>
-                      <ul>
-                        <li>Cafe</li>
-                        <li>Travelling</li>
-                        <li>Entertainment</li>
-                        <li>Health</li>
-                      </ul>
+                      <h1 className="text-lg font-bold mb-2">Goals</h1>
+                      {goals.slice(0, 3).map((goal) => (
+                      <div key={goal.id} className="mb-4">
+                        <h4 className="font-semibold">{goal.name}</h4>
+                        <Progress
+                          value={(goal.currentAmount / goal.amount) * 100}
+                          className="w-full h-4 mb-1"
+                        />
+                        <div className="flex justify-between text-sm">
+                          <span>Current: ${goal.currentAmount.toFixed(2)}</span>
+                          <span>Target: ${goal.amount.toFixed(2)}</span>
+                        </div>
+                      </div>
+                    ))}
                     </div>
                   </div>
 
