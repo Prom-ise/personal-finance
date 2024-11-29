@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Chart } from "chart.js";
 
-const ExpensesDoughnutChart = ({ expenses }) => {
+const BudgetDoughnutChart = ({ expenses }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -45,4 +45,4 @@ const ExpensesDoughnutChart = ({ expenses }) => {
   return <canvas ref={chartRef}></canvas>;
 };
 
-export default ExpensesDoughnutChart;
+export default BudgetDoughnutChart;
