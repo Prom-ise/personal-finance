@@ -110,6 +110,7 @@ export default function PersonalFinanceApp() {
   const [isEditingBudget, setIsEditingBudget] = useState(false);
   const [budget, setBudget] = useState(0);
   const [category, setCategory] = useState("");
+  const [paymentInfo, setPaymentInfo] = useState("");
   const [amount, setAmount] = useState("");
   const [contributionAmount, setContributionAmount] = useState("");
   const [goals, setGoals] = useState([]);
@@ -365,10 +366,12 @@ export default function PersonalFinanceApp() {
     await addDoc(collection(db, "expenses"), {
       userId: user.uid,
       amount: parseFloat(amount),
+      paymentInfo,
       category,
       date: Timestamp.now(),
     });
     setAmount("");
+    setPaymentInfo("");
     setCategory("");
     fetchExpenses();
     toast.success("Expense added successfully!");
@@ -504,7 +507,13 @@ export default function PersonalFinanceApp() {
                     </div>
                   </li>
                 </ul>
-                <div className="fixed bottom-4">
+                <div className="fixed bottom-4"> 
+<label class="switch">
+  <span class="sun"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="#ffd43b"><circle r="5" cy="12" cx="12"></circle><path d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1 -.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1 -.75.29zm-12.02 12.02a1 1 0 0 1 -.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1 -.7.24zm6.36-14.36a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm0 17a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm-5.66-14.66a1 1 0 0 1 -.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.29zm12.02 12.02a1 1 0 0 1 -.7-.29l-.66-.71a1 1 0 0 1 1.36-1.36l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.24z"></path></g></svg></span>
+  <span class="moon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg></span>   
+  <input type="checkbox" class="input"/>
+  <span class="slider"></span>
+</label>
                   <div className="my-3">
                     <TabsTrigger value="help">
                       <HelpCircle /> Help
@@ -809,10 +818,19 @@ export default function PersonalFinanceApp() {
                           <SelectItem value="Entertainment">
                             Entertainment
                           </SelectItem>
+                          <SelectItem value="Allowance">Allowance</SelectItem>
                           <SelectItem value="Other">Other</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
+                    <div> <Label htmlFor="paymentInfo">Payment Info</Label>
+                      <Input
+                        id="paymentInfo"
+                        type="text"
+                        value={paymentInfo}
+                        onChange={(e) => setPaymentInfo(e.target.value)}
+                        placeholder="Enter payment information"
+                      /></div>
                     <div className="flex items-end">
                       <Button onClick={addExpense} className="w-full">
                         Add Expense
@@ -823,17 +841,41 @@ export default function PersonalFinanceApp() {
                     <h3 className="text-lg font-semibold mb-2">
                       Recent Expenses
                     </h3>
-                    <ul className="space-y-2">
-                      {expenses.map((expense) => (
-                        <li
-                          key={expense.id}
-                          className="flex justify-between items-center"
-                        >
-                          <span>{expense.category}</span>
-                          <span>${expense.amount.toFixed(2)}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <table className="recent-t w-full text-left">
+                            <thead>
+                              <tr className="tr">
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Payment Info</th>
+                                <th>Category</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {expenses.map((expense) => {
+                                const date = new Date(
+                                  expense.date.seconds * 1000
+                                );
+                                const formattedDate = date
+                                  .toLocaleDateString("en-GB", {
+                                    day: "numeric",
+                                    month: "short",
+                                    hour: "numeric",
+                                    minute: "2-digit",
+                                    hour12: true,
+                                  })
+                                  .replace(",", ""); // Remove comma from date string if present
+
+                                return (
+                                  <tr key={expense.id} className="border-b">
+                                    <td>{formattedDate}</td>
+                                    <td>${expense.amount.toFixed(2)}</td>
+                                    <td>{expense.paymentInfo}</td>
+                                    <td>{expense.category}</td>
+                                  </tr>
+                                );
+                              })}
+                            </tbody>
+                          </table>
                   </div>
                 </CardContent>
               </Card>
