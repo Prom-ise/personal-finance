@@ -177,3 +177,33 @@
 .input:checked + .slider:before {
   transform: translateX(30px);
 }
+.recent-expenses-container {
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+.recent-expenses-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.recent-expenses-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+.login-page {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-container {
+  background-color: rgba(255, 255, 255, 0.8); /* Optional: Add a white overlay on content */
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.carousel-item-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
