@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
-import Login from "./Login";
-import Pfm from "./Pfm"
+import Login from "../src/pages/Login";
+import Pfm from "../src/pages/Pfm"
 import { useNavigate } from "react-router-dom";
 import BudgetDoughnutChart from "./components/ui/component/BudgetDoughnutChart";
 import "./App.css";

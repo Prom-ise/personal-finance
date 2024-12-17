@@ -207,3 +207,39 @@
   align-items: center;
   justify-content: center;
 }
+.static-content{
+  position: absolute;
+  bottom: 3em;
+}
+.dot{
+  width: 0.8em;
+  height: 0.8em;
+  border: 2px solid black;
+  background-color: #73C0FC;
+  border-radius: 50%;
+  opacity: .5;
+}
+.sign{
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  width: 15em;
+  transition: .3s ease-in-out;
+}
+.sign:active{
+  scale: .9;
+}
+.sign:hover{
+  scale: 1.05;
+}
+.spinner{
+  animation: spins 2s infinite linear;
+}
+@keyframes spins{
+  from {
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import BudgetDoughnutChart from "./components/ui/component/BudgetDoughnutChart";
-import "./App.css";
+import BudgetDoughnutChart from "../components/ui/component/BudgetDoughnutChart";
+// import "./App.css";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {
@@ -133,6 +133,7 @@ const Pfm = () => {
 
   const signOut = () => {
     auth.signOut();
+    toast.success("Logout successfully")
     // window.location.href = "App.jsx";
   };
 
